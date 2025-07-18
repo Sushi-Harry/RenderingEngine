@@ -1,0 +1,4 @@
+1.) Create an engine class that initializes: GLFW, GLEW, a window + also has a draw function
+2.) Create a skybox
+3.) Create a model loading class that can load fbx files
+4.) Create a lighting system

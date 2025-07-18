@@ -1,0 +1,13 @@
+MODEL LOADER WORKS -- 2 July 2025 (Camera Works too)
+LIGHTING HAS BEEN SET UP -- 3 July 2025
+SKYBOX WORKS NOW. So does the Mouse Toggle -- 5 July 2025
+GRID HAS BEEN MADE -- 6 July 2025 (Literally 12 A.M.)
+Added DIRECTIONAL AND POINT LIGHTS && ADDED SOME GUI OPTIONS TO CONTROL LIGHTS-- 7 July 2025 (3 A.M.)    (* Wrote a small bash script to convert color codes in 0-255 range into 0-1 range)
+
+SPOTLIGHT DONE----
+
+
+
+TO DO:
+2.) Set up the engine class such that it can handle the objects in the form of an array in order to have multiple number of objects without having to edit the code again and again.
+3.) Alternatively, you could also set up a separate class for the objects

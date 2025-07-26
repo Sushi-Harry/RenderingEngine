@@ -1,5 +1,4 @@
 #include "Engine.hpp"
-#include "Map.hpp"
 #include "camera.h"
 #include <GLFW/glfw3.h>
 #include <glm/ext/vector_float3.hpp>
@@ -39,10 +38,6 @@ Engine::Engine(int HEIGHT, int WIDTH, const char* WINDOW_NAME){
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     glEnable(GL_DEPTH_TEST);
-    
-    // FACE CULLING
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
 
     //initialize GLEW
     if(!initGLEW()){
@@ -53,7 +48,7 @@ Engine::Engine(int HEIGHT, int WIDTH, const char* WINDOW_NAME){
     glfwSwapInterval(1);
 
     //---------------------MAP-----------------------------//
-    newMap = new Map(window);
+    sceneMgr = new SceneManager(window);
     //-------------------CAMERA----------------------------//
     CameraSetup();
 }
@@ -159,10 +154,8 @@ void Engine::Update(){
     // Test code for model
     glm::mat4 projection = glm::perspective(glm::radians(90.0f), (float)width/(float)height, 0.1f, 100.0f);
     glm::mat4 view = MainCamera->GetViewMatrix();
-    //--------------------------DRAW USING MAP CLASS-------------------------------//
-    newMap->DrawMap(projection, view, MainCamera->Position);
-
-    newMap->GUI();
+    //--------------------------DRAW USING SCENE MANAGER CLASS-------------------------------//
+    sceneMgr->DrawScene(projection, view, MainCamera->Position);
     
     ProcessMovement(window);
     glfwSwapBuffers(window);

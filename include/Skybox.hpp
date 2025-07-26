@@ -16,9 +16,10 @@ public:
     void drawSetup();
     unsigned int loadCubeMap(std::vector<std::string> faces);
 
-    void DrawSkybox(Shader &shader, glm::mat4 proection, glm::mat4 view);
+    void DrawSkybox(glm::mat4 proection, glm::mat4 view);
     unsigned cubemapTexture;
 
 private:
     unsigned int VAO, VBO;
+    Shader* SkyboxShader;
 };

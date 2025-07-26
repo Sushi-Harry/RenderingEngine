@@ -18,7 +18,7 @@ unsigned int indices[] = {
 unsigned int indexLength = sizeof(indices) / sizeof(indices[0]);
 
 Grid::Grid(){
-    GridShader = new Shader("shaders/grid.vs", "shaders/grid.fs");
+    GridShader = new Shader("include/Essentials/grid.vs", "include/Essentials/grid.fs");
     setupGrid();
 }
 

@@ -17,9 +17,13 @@
 class Model{
 
 public:
-    Model(const std::string &PATH);
-    void Draw(Shader &SHADER);
+    Model(const std::string &PATH, const std::string &SHADER_PATH_VS, const std::string &SHADER_PATH_FS, std::string NAME);
+    void Draw(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX, glm::vec3 VIEW_POS);
+    Shader* ModelShader;
 private:
+    // Basics
+    std::string NAME;
+
     // Model Data
     std::vector<Mesh> meshes;
     std::string directory;

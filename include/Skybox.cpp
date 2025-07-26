@@ -21,6 +21,7 @@ std::vector<std::string> faces = {
 };
 
 Skybox::Skybox(){
+    SkyboxShader = new Shader("include/Essentials/Skybox.vs", "include/Essentials/Skybox.fs");
     drawSetup();
 }
 
@@ -113,13 +114,13 @@ unsigned int Skybox::loadCubeMap(std::vector<std::string> faces){
     return textureID;
 }  
 
-void Skybox::DrawSkybox(Shader &shader, glm::mat4 projection, glm::mat4 view){
+void Skybox::DrawSkybox(glm::mat4 projection, glm::mat4 view){
     glDepthMask(GL_FALSE);
     glDepthFunc(GL_LEQUAL);
-    shader.use();
+    SkyboxShader->use();
     view = glm::mat4(glm::mat3(view));
-    shader.setMat4("projection", projection);
-    shader.setMat4("view", view);
+    SkyboxShader->setMat4("projection", projection);
+    SkyboxShader->setMat4("view", view);
 
     glBindVertexArray(VAO);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);

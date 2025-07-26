@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/ext/vector_uint4.hpp>
 #include "camera.h"
-#include "Map.hpp"
+#include "Scene.hpp"
 
 class Engine{
 public:
@@ -21,7 +21,7 @@ private:
     Camera* MainCamera;
 
     //----------------------------MAP CLASS----------------------------------//
-    Map* newMap;
+    SceneManager* sceneMgr;
 
     // Input Variables
     bool CURSOR_HIDDEN;

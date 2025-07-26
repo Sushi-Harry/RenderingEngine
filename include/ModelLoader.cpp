@@ -6,6 +6,8 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 #include <assimp/types.h>
+#include <glm/ext/matrix_transform.hpp>
+#include <string>
 #include <vector>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -53,13 +55,26 @@ unsigned int TextureFromFile(const char *path, const std::string &directory){
     return textureID;
 }
 
-Model::Model(const std::string &PATH){
+Model::Model(const std::string &PATH, const std::string &SHADER_PATH_VS, const std::string &SHADER_PATH_FS, std::string NAME){
     LoadModel(PATH);
+    this->NAME = NAME;
+    ModelShader = new Shader(SHADER_PATH_VS.c_str(), SHADER_PATH_FS.c_str());
 }
 
-void Model::Draw(Shader &SHADER){
+void Model::Draw(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX, glm::vec3 VIEW_POS){
     for(unsigned int i = 0; i < meshes.size(); i++){
-        meshes[i].Draw(SHADER);
+        ModelShader->use();
+        ModelShader->setFloat("material.shininess", 32.0f);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::scale(model, glm::vec3(1.0f));
+        model = glm::translate(model, glm::vec3(0.0f));
+
+        ModelShader->setMat4("projection", PROJECTION);
+        ModelShader->setMat4("view", VIEW_MATRIX);
+        ModelShader->setVec3("viewPos", VIEW_POS);
+        ModelShader->setMat4("model", model);
+        
+        meshes[i].Draw(*ModelShader);
     }
 }
 

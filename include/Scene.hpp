@@ -1,9 +1,12 @@
-#include <vector>
+#pragma once
+
+#include "Grid.hpp"
 #include "ModelLoader.hpp"
 #include "ShaderClass.hpp"
 #include "Skybox.hpp"
+#include "StencilBuffer.hpp"
 #include "lights.hpp"
-#include "Grid.hpp"
+#include <vector>
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
@@ -17,30 +20,46 @@ enum GUI_STATE {
     ADD_DIRECTIONAL_LIGHT
 };
 
-class SceneManager{
-public:
-    SceneManager(GLFWwindow* window);
-        void DrawScene(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX, glm::vec3 VIEW_POS);
+class SceneManager {
+  public:
+    SceneManager(GLFWwindow *window);
+    void DrawScene(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX,
+                   glm::vec3 VIEW_POS, int WIDTH, int HEIGHT,
+                   GLFWwindow *WINDOW);
+    void debug_drawOutlined(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX,
+                            glm::vec3 VIEW_POS, int WIDTH, int HEIGHT,
+                            GLFWwindow *WINDOW);
+    unsigned int SelectionBuffer(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX,
+                                 glm::vec3 VIEW_POS, int WIDTH, int HEIGHT,
+                                 GLFWwindow *WINDOW);
+    void ResultantDrawScene(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX,
+                            glm::vec3 VIEW_POS, int WIDTH, int HEIGHT,
+                            GLFWwindow *WINDOW);
+    void PreUpdate();
     ~SceneManager();
-private:
-    void SetupObjects(GLFWwindow* window);
+
+  private:
+    void SetupObjects(GLFWwindow *window);
 
     void CreateDirLight(std::string NAME);
     void CreateSpotLight(std::string NAME);
     void CreatePointLight(std::string NAME);
-    void GUI_INIT(GLFWwindow* window);
+    void GUI_INIT(GLFWwindow *window);
     void DrawGUI();
 
-    void CreateLitModel(std::string NAME, std::string PATH_TO_MODEL, std::string VS_PATH, std::string FS_PATH);
+    void CreateLitModel(std::string NAME, std::string PATH_TO_MODEL,
+                        std::string VS_PATH, std::string FS_PATH);
 
-    Skybox* skybox;
+    Skybox *skybox;
     GUI_STATE guiState;
     std::vector<Model> LitModels;
     std::vector<DirectionalLight> DirectionalLights;
     std::vector<PointLight> PointLights;
     std::vector<SpotLight> SpotLights;
-    Grid* mainGrid; 
-    // Test Variables   
-    Model* testModel;
-    DirectionalLight* Light1;
+    Grid *mainGrid;
+
+    StencilBuffer *stencilBuffer;
+
+    // DEBUG
+    Shader *stencilBufferShader;
 };

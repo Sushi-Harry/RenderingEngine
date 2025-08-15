@@ -59,22 +59,58 @@ Model::Model(const std::string &PATH, const std::string &SHADER_PATH_VS, const s
     LoadModel(PATH);
     this->NAME = NAME;
     ModelShader = new Shader(SHADER_PATH_VS.c_str(), SHADER_PATH_FS.c_str());
+    SELECTION_SHADER = new Shader("Essentials/ImpShaders/selectionMode.vs", "Essentials/ImpShaders/selectionMode.fs");
 }
 
-void Model::Draw(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX, glm::vec3 VIEW_POS){
+void Model::SetID(int ID){
+    this->ID = ID;
+}
+
+void Model::Draw(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX, glm::vec3 VIEW_POS, float ScaleFactor){
     for(unsigned int i = 0; i < meshes.size(); i++){
         ModelShader->use();
         ModelShader->setFloat("material.shininess", 32.0f);
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::scale(model, glm::vec3(1.0f));
-        model = glm::translate(model, glm::vec3(0.0f));
-
+        scaleModel(ScaleFactor, model);
         ModelShader->setMat4("projection", PROJECTION);
         ModelShader->setMat4("view", VIEW_MATRIX);
         ModelShader->setVec3("viewPos", VIEW_POS);
         ModelShader->setMat4("model", model);
         
         meshes[i].Draw(*ModelShader);
+    }
+}
+
+void Model::Draw_NO_SHADER_USE(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX, glm::vec3 VIEW_POS, float ScaleFactor, Shader& CUSTOM_SHADER){
+    for(unsigned int i = 0; i < meshes.size(); i++){
+        CUSTOM_SHADER.use();
+        CUSTOM_SHADER.setFloat("material.shininess", 32.0f);
+        glm::mat4 model = glm::mat4(1.0f);
+        scaleModel(ScaleFactor, model);
+        CUSTOM_SHADER.setMat4("projection", PROJECTION);
+        CUSTOM_SHADER.setMat4("view", VIEW_MATRIX);
+        CUSTOM_SHADER.setVec3("viewPos", VIEW_POS);
+        CUSTOM_SHADER.setMat4("model", model);
+        
+        meshes[i].Draw(*ModelShader);
+    }
+}
+
+void Model::Draw_SELECTIONMODE(glm::mat4 PROJECTION, glm::mat4 VIEW_MATRIX, glm::vec3 VIEW_POS, float ScaleFactor){
+    for(unsigned int i = 0; i < meshes.size(); i++){
+        SELECTION_SHADER->use();
+        SELECTION_SHADER->setFloat("material.shininess", 32.0f);
+        glm::mat4 model = glm::mat4(1.0f);
+
+        scaleModel(ScaleFactor, model);
+        model = glm::translate(model, glm::vec3(0.0f));
+
+        SELECTION_SHADER->setMat4("projection", PROJECTION);
+        SELECTION_SHADER->setMat4("view", VIEW_MATRIX);
+        SELECTION_SHADER->setVec3("viewPos", VIEW_POS);
+        SELECTION_SHADER->setMat4("model", model);
+        
+        meshes[i].Draw(*SELECTION_SHADER);
     }
 }
 
@@ -187,4 +223,8 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType 
     }
 
     return textures;
+}
+
+void Model::scaleModel(float ScaleFactor, glm::mat4& model_matrix){
+    model_matrix = glm::scale(model_matrix, glm::vec3(ScaleFactor));
 }

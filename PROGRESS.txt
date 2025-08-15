@@ -1,13 +1,8 @@
-MODEL LOADER WORKS -- 2 July 2025 (Camera Works too)
-LIGHTING HAS BEEN SET UP -- 3 July 2025
-SKYBOX WORKS NOW. So does the Mouse Toggle -- 5 July 2025
-GRID HAS BEEN MADE -- 6 July 2025 (Literally 12 A.M.)
-Added DIRECTIONAL AND POINT LIGHTS && ADDED SOME GUI OPTIONS TO CONTROL LIGHTS-- 7 July 2025 (3 A.M.)    (* Wrote a small bash script to convert color codes in 0-255 range into 0-1 range)
+To DO:
 
-SPOTLIGHT DONE----
+- The stencil buffer class is complete so now add a way to actually use that class in the engine class directly. (Not through the scene class)
 
+----- TRY AGAIN -------
+DOESN"T WORK RIGHT NOW
 
-
-TO DO:
-2.) Set up the engine class such that it can handle the objects in the form of an array in order to have multiple number of objects without having to edit the code again and again.
-3.) Alternatively, you could also set up a separate class for the objects
+It works now but the problem is that It's all hardcoded for testing purposes. Need to actually use the StencilBuffer class in the Scene class to put a checkmark on this feature.

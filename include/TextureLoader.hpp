@@ -1,18 +1,21 @@
-// #pragma once
+#pragma once
 
-// #include <assimp/types.h>
-// #include "stb_image.h"
+#include <assimp/types.h>
+#include <string>
+#include <vector>
+#include "stb_image.h"
+#include "Mesh.hpp"
 
-// class TextureLoader{
-// public:
-//     TextureLoader(std::string DIRECTORY, aiString FILE_NAME);
-//     unsigned int ReturnTextureID();
+class TextureLoader{
+public:
+    TextureLoader(std::string DIRECTORY, aiString FILE_NAME);
+    unsigned int ReturnTextureID();
 
-// private:
-//     unsigned int texture;
-//     std::string directory;
-//     std::string file_name;
-//     int width, height, nrChannels;
+private:
+    unsigned int texture;
+    std::string directory;
+    std::string file_name;
+    int width, height, nrChannels;
 
-//     void SetupTexture();
-// };
+    void SetupTexture();
+};

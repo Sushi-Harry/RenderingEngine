@@ -1,14 +1,14 @@
+#pragma once
+
+#include "ShaderClass.hpp"
 #include <cmath>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "ShaderClass.hpp"
-
-
 
 using namespace glm;
 
-class DirectionalLight{
-public:
+class DirectionalLight {
+  public:
     void SetShader(Shader &SHADER);
     void setName(std::string NAME);
 
@@ -23,12 +23,12 @@ public:
     float diffuse = 1.0f;
     float ambient = 0.05f;
     void takeInput();
-private: 
-    
+
+  private:
 };
 
-class PointLight{
-public:
+class PointLight {
+  public:
     void SetShader(Shader &SHADER);
     void setName(std::string NAME);
 
@@ -37,7 +37,7 @@ public:
     bool enabled = true;
     vec3 position = vec3(0.0f);
     vec3 color = vec3(1.0f);
-    
+
     // Attribute Strength
     float specular = 1.0f;
     float diffuse = 1.0f;
@@ -49,13 +49,12 @@ public:
     float quadratic = 0.0032f;
     void takeInput();
 
-private:
+  private:
 };
 
-class SpotLight{
+class SpotLight {
 
-public:
-
+  public:
     void SetShader(Shader &SHADER);
     void setName(std::string NAME);
 
@@ -64,7 +63,7 @@ public:
     bool enabled = true;
     vec3 position = vec3(0.0f);
     vec3 color = vec3(1.0f);
-    
+
     // Attribute Strength
     float specular = 1.0f;
     float diffuse = 1.0f;
@@ -79,5 +78,6 @@ public:
     float linear = 0.09f;
     float quadratic = 0.0032f;
     void takeInput();
-private:
+
+  private:
 };

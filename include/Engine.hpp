@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/ext/vector_uint4.hpp>
+#include "ShaderClass.hpp"
 #include "camera.h"
 #include "Scene.hpp"
 
@@ -33,6 +34,12 @@ private:
     bool firstMouse;
     float deltaTime;
     float lastFrame;
+
+    // Object Selection
+    void BufferSetup();
+    void PostUpdate();
+    Shader* SelectionShader;
+
 
     // Private Functions
     bool initGLFW();

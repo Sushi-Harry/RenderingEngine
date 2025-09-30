@@ -150,9 +150,6 @@ void Engine::ProcessMovement(GLFWwindow *window) {
 }
 
 void Engine::Update() {
-    if (glfwWindowShouldClose(window)) {
-        return;
-    }
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
     // GL_STENCIL_BUFFER_BIT);
 
@@ -164,7 +161,7 @@ void Engine::Update() {
     glm::mat4 view = MainCamera->GetViewMatrix();
     //--------------------------DRAW USING SCENE MANAGER
     // CLASS-------------------------------//
-    // sceneMgr->PreUpdate();
+    sceneMgr->PreUpdate();
     sceneMgr->ResultantDrawScene(projection, view, MainCamera->Position, width,
                                  height, window);
 

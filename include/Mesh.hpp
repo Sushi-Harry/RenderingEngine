@@ -26,7 +26,7 @@ public:
     std::vector<Texture> textures;
 
     Mesh(std::vector<Vertex> VERTEX_VECTOR, std::vector<unsigned int> INDEX_VECTOR, std::vector<Texture> TEXTURE_VECTOR);
-    void Draw(Shader &SHADER);
+    void Draw(Shader &SHADER) const;
 private:
     unsigned int VAO, VBO, EBO;
 

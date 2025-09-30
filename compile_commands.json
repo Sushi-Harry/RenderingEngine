@@ -1,0 +1,52 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wall",
+      "-Wextra",
+      "-std=c++17",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "obj/PostProcessing_Framebuffer.o",
+      "include/PostProcessing_Framebuffer.cpp"
+    ],
+    "directory": "/home/harry/Projects/RenderingEngine",
+    "file": "/home/harry/Projects/RenderingEngine/include/PostProcessing_Framebuffer.cpp",
+    "output": "/home/harry/Projects/RenderingEngine/obj/PostProcessing_Framebuffer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-std=c++17",
+      "-Iinclude",
+      "obj/Engine.o",
+      "obj/Framebuffer_PixelPicker.o",
+      "obj/Grid.o",
+      "obj/Mesh.o",
+      "obj/ModelLoader.o",
+      "obj/PostProcessing_Framebuffer.o",
+      "obj/Scene.o",
+      "obj/Skybox.o",
+      "obj/TextureLoader.o",
+      "obj/lights.o",
+      "obj/imgui/imgui.o",
+      "obj/imgui/imgui_demo.o",
+      "obj/imgui/imgui_draw.o",
+      "obj/imgui/imgui_impl_glfw.o",
+      "obj/imgui/imgui_impl_opengl3.o",
+      "obj/imgui/imgui_tables.o",
+      "obj/imgui/imgui_widgets.o",
+      "-g",
+      "-o",
+      "bin/main",
+      "main.cpp"
+    ],
+    "directory": "/home/harry/Projects/RenderingEngine",
+    "file": "/home/harry/Projects/RenderingEngine/main.cpp",
+    "output": "/home/harry/Projects/RenderingEngine/bin/main"
+  }
+]
